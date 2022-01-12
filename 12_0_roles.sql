@@ -6,7 +6,7 @@ DECLARE
     role text;
 BEGIN
     FOREACH role IN ARRAY ARRAY['qgep_viewer', 'qgep_user', 'qgep_manager', 'qgep_sysadmin'] LOOP
-      IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = role) THEN
+      IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolename = role) THEN
           EXECUTE format('CREATE ROLE %1$I NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION', role);
       END IF;
     END LOOP;
